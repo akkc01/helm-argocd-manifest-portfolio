@@ -20,11 +20,11 @@ spec:
   source:
     repoURL: https://github.com/akkc01/helm-argocd-manifest-portfolio.git
     targetRevision: main
-    path: akkc-chart
+    path: helm_chart
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: akkc #this is the app namespace
 
   syncPolicy:
     automated:
