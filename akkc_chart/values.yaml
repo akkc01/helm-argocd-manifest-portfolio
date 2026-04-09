@@ -1,0 +1,19 @@
+replicaCount: 10
+
+image:
+  repository: akkc01/akkc
+  tag: "a62c9ee9d6df1efad66761780f0b086dd47174d3"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  requests:
+    cpu: "100m"
+  limits:
+    cpu: "200m"
+
+labels:
+  app: akkc-portfolio

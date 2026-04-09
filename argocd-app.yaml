@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: akkc-app
+  namespace: argocd   
+
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: myapp=akkc01/akkc
+
+    argocd-image-updater.argoproj.io/myapp.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/myapp.helm.image-tag: image.tag
+
+    argocd-image-updater.argoproj.io/myapp.update-strategy: latest
+
+    argocd-image-updater.argoproj.io/write-back-method: git
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/akkc01/helm-argocd-manifest-portfolio.git
+    targetRevision: main
+    path: akkc-chart
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
